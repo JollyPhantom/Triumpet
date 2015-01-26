@@ -18,12 +18,13 @@
   },
   "homepage": "https://github.com/JollyPhantom/Triumpet",
   "dependencies": {
-    "express": "~4.11.1",
-    "body-parser": "~1.10.2",
-    "mongoose": "~3.8.21",
-    "jwt-simple": "~0.2.0",
-    "q": "~1.1.2",
+    "angular-ui-router": "^0.2.13",
     "bcrypt-nodejs": "0.0.3",
-    "ejs": "~2.2.3"
+    "body-parser": "~1.10.2",
+    "ejs": "~2.2.3",
+    "express": "~4.11.1",
+    "jwt-simple": "~0.2.0",
+    "mongoose": "~3.8.21",
+    "q": "~1.1.2"
   }
 }
