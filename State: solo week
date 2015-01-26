@@ -1,0 +1,23 @@
+State: solo week
+
+-Learning gulp today, to automate a few dummy tests on our server (using supertest).
+
+Monday/Tuesday: get most of the frontend done, don't worry about testing. I'll write it.
+Team is too small.
+
+Get something deployed. Minify/lint/test after, I'll deploy that independently while you guys keep working.
+
+See crosslinked blogs, not just supertest:
+http://www.marcusoft.net/2014/02/mnb-supertest.html
+
+
+
+How ESLint differs from JSHint
+
+Despite similar goals, ESLint and JSHint have some very specific differences. First and foremost, JSHint uses a progressive parser, finding errors along the way. ESLint uses Esprima, so the parsing is done first and then the rules are applied. That means JSHint will print out warnings up to and including a syntax error where ESLint will show only the syntax error. This makes JSHint much better for use in editors.
+
+ESLint is much better suited for use in build systems and as a general command line utility. It works great for pre-commit hooks.
+
+ESLint is a two-pass utility. The first pass is done by Esprima to parse the JavaScript and the second pass is a traversal of the AST to apply certain rules. JSHint is a single-pass utility, meaning that it will generally be faster.
+
+ESLint is strictly a Node.js utility. JSHint runs on most JavaScript runtimes, including Rhino.

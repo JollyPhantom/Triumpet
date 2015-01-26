@@ -11,14 +11,9 @@ var dbPath         = process.env.dbPath || 'mongodb://localhost/triumpet';
 mongoose.connect(dbPath, function(err, res){
   if(err){console.log('error :', err)}
 });
-console.log(__dirname);
-console.log(__dirname+'/../client');
 
 //configure server with all middleware and routing
 require('./config/router.js')(app, express);
-// app.use(express.static(__dirname + '/../client/project'));
-app.use('/static', express.static(__dirname + '/../client/project'));
-app.use('/t', express.static(__dirname + '/../client/project'));
 
 //export our app required by server.js
 module.exports = app;
