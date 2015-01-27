@@ -9,19 +9,26 @@ angular.module('tp.factories',[])
 
 	auth.signin = function(){
 
-	}
+	};
 
-	auth.signup = function(){
-
-	}
+	auth.signup = function(user){
+		return $http({
+			method: 'POST',
+			url: '/api/users/signup',
+			data: user
+		})
+		.then(function(resp){
+			return resp.data.token;
+		})
+	};
 
 	auth.isAuth = function(){
 
-	}
+	};
 
 	auth.signout = function(){
 
-	}
+	};
 
 	return auth;
 
