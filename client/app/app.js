@@ -35,8 +35,12 @@ angular.module('triumpet', [
       controller  : 'AuthCtrl'
     })
     .state('editor',{
-      url         : '/:retailer/editor',
       template    : '<tp-editor></tp-editor>',
+      controller  : 'EditorCtrl'
+    })
+    .state('editor.test',{
+      url         : '/:retailer/editor/floorplan',
+      template    : '<tp-floor-plan></tp-floor-plan>',
       controller  : 'EditorCtrl'
     })
     .state('home',{

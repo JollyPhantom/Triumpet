@@ -1,0 +1,12 @@
+<p>Floor Plan</p>
+<div ng-repeat='(index,coor) in data.floorPlan'>
+  <span id='floor-plan-coor'>{{ 'X:  '}}
+    <input type='number' value='{{coor.x | number:2}}' ng-model='data.floorPlan[index].x' ng-change='drawFloorPlan()'></input>
+  </span>
+  <span id='floor-plan-coor'>{{ 'Y:  '}}
+    <input type='number' value="{{coor.y | number:2}}" ng-model='data.floorPlan[index].y' ng-change='drawFloorPlan()'></input>
+  </span>
+  <button href='' id='editor-delete' type='delete' ng-click='deleteFloorPlan(index); drawFloorPlan()'>X</button>
+  <br>
+</div>
+<button href='' id='editor-submit' type='submit' ng-click='updateFloorPlan()'>update</button>

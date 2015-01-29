@@ -37,10 +37,15 @@ angular.module('tp.editor',[])
 
   $scope.updateFloorPlan = function(){
     Map.update($scope.data.username, {floorPlan:$scope.data.floorPlan});
-  }
+  };
+
+  $scope.deleteFloorPlan = function(index){
+    $scope.data.floorPlan.splice(index,1);
+    Map.update($scope.data.username, {floorPlan:$scope.data.floorPlan});
+  };
 
   $scope.fetch($stateParams.retailer);
-  $scope.device = navigator.userAgent;
+  // $scope.device = navigator.userAgent;
 })
 
 //Editor
@@ -55,7 +60,20 @@ angular.module('tp.editor',[])
       var height = $window.innerHeight;
       scope.svg = d3.select('#map-main').append('svg')
         .attr('id','map-svg')
-        .on('click',function(){
+    }
+  }
+})
+
+//Floor Plan
+.directive('tpFloorPlan',function($window){
+  return {
+    restrict: 'EA',
+    scope: false,
+    templateUrl:'../app/editor/floorplan.html',
+    link: function(scope, el, attr){
+      var width = $window.innerWidth;
+      var height = $window.innerHeight;
+      scope.svg.on('click',function(){
           var x = d3.mouse(this)[0]/scope.scale;
           var y = d3.mouse(this)[1]/scope.scale;
           scope.coor = {

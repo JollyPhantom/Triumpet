@@ -21,15 +21,24 @@ svg {
 }
 
 #editor-main {
-  width: 82vw;
+  width: 92vw;
   min-height: 80vh;
   margin: 10vh auto 0 auto;
+}
+
+#editor-delete {
+  width: 2vw;
+  height: 2vw;
+  border: none;
+  background-color: black;
+  color: red;
+  font-size: 1vw;
 }
 
 #map-svg, #editor-control {
   border: none;
   background-color: black;
-  opacity: 0.75;
+  opacity: 0.95;
   width: 60vw;
   height: 80vh;
   position: relative;
@@ -39,7 +48,7 @@ svg {
 }
 
 #editor-control {
-  width: 20vw;
+  width: 30vw;
   margin: 0 0 0 2vw;
   padding: 1vw 2vw 1vw 2vw;
   color: white;
@@ -50,7 +59,7 @@ svg {
 }
 
 #floor-plan-coor>input {
-  width: 6vw;
+  width: 8vw;
   font-size: 1vw;
   color: black;
 }
@@ -88,7 +97,7 @@ svg {
   padding-left: 10px;
 }
 
-#auth-submit, #auth-redirect {
+#auth-submit, #auth-redirect, #editor-submit  {
   border: none;
   padding: 10px;
   width: 100px;
@@ -106,7 +115,13 @@ svg {
   margin: 0px;
 }
 
-#auth-submit:hover, #auth-redirect:hover {
+#editor-submit {
+  font-size: 10px;
+  padding: 5px;
+  width: 75px;
+}
+
+#auth-submit:hover, #auth-redirect:hover, #editor-submit:hover {
   background-color: rgb(0, 169, 255);
 }
 

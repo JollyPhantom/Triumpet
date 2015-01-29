@@ -1,17 +1,7 @@
 <div class='map-background'>
   <div id='editor-main'>
     <div id='editor-control' ui-view>
-      <p>Floor Plan</p>
-      <div ng-repeat='(index,coor) in data.floorPlan'>
-        <span id='floor-plan-coor'>{{ 'X:  '}}
-          <input type='number' value='{{coor.x | number:2}}' ng-model='data.floorPlan[index].x' ng-change='drawFloorPlan()'></input>
-        </span>
-        <span id='floor-plan-coor'>{{ 'Y:  '}}
-          <input type='number' value="{{coor.y | number:2}}" ng-model='data.floorPlan[index].y' ng-change='drawFloorPlan()'></input>
-        </span>
-        <br>
-      </div>
-      <button href='' type='submit' ng-click='updateFloorPlan()'>update</button>
+     
     </div>
     <div id='map-main'></div>
   </div>
