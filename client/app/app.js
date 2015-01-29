@@ -16,23 +16,28 @@ angular.module('triumpet', [
     })
     .state('auth.signup',{
       url         : '/signup',
-      template    : "<tp-sign-up></tp-sign-up>",
-      controller  : "AuthCtrl"
+      template    : '<tp-sign-up></tp-sign-up>',
+      controller  : 'AuthCtrl'
     })
     .state('auth.signin',{
       url         : '/signin',
-      template    : "<tp-sign-in></tp-sign-in>",
-      controller  : "AuthCtrl"
+      template    : '<tp-sign-in></tp-sign-in>',
+      controller  : 'AuthCtrl'
     })
     .state('auth.retailerSignin',{
       url         : '/retailer/signin',
-      template    : "<tp-retailer-signin></tp-retailer-signin>",
-      controller  : "AuthCtrl"
+      template    : '<tp-retailer-signin></tp-retailer-signin>',
+      controller  : 'AuthCtrl'
     })
     .state('auth.retailerSignup',{
       url         : '/retailer/signup',
-      template    : "<tp-retailer-signup></tp-retailer-signup>",
-      controller  : "AuthCtrl"
+      template    : '<tp-retailer-signup></tp-retailer-signup>',
+      controller  : 'AuthCtrl'
+    })
+    .state('editor',{
+      url         : '/:retailer/editor',
+      template    : '<tp-editor></tp-editor>',
+      controller  : 'EditorCtrl'
     })
     .state('home',{
       url         : '/',

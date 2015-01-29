@@ -97,6 +97,7 @@ controller.update = function(req,res,next){
           retailer[attr] = req.body[attr];
         }
         retailer.save();
+        console.log(req.body, retailer)
         res.sendStatus(300);
       }
     })

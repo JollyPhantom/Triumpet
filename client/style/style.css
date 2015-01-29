@@ -20,14 +20,52 @@ svg {
   margin: 5px;
 }
 
-.auth-background {
+#editor-main {
+  width: 82vw;
+  min-height: 80vh;
+  margin: 10vh auto 0 auto;
+}
+
+#map-svg, #editor-control {
+  border: none;
+  background-color: black;
+  opacity: 0.75;
+  width: 60vw;
+  height: 80vh;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  float: right;
+}
+
+#editor-control {
+  width: 20vw;
+  margin: 0 0 0 2vw;
+  padding: 1vw 2vw 1vw 2vw;
+  color: white;
+}
+
+#floor-plan-coor {
+  width: 8vw;
+}
+
+#floor-plan-coor>input {
+  width: 6vw;
+  font-size: 1vw;
+  color: black;
+}
+
+.auth-background, .map-background {
   background: url("../assets/background.png");
   min-width: 100vw;
   min-height: 100vh;
-  background-position: center;
   background-size: cover;
-  text-align: center;
   position: absolute;
+  background-position: center;
+}
+
+.auth-background {
+  text-align: center;
 }
 
 #auth-logo {
