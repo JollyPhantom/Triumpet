@@ -97,7 +97,7 @@ svg {
   padding-left: 10px;
 }
 
-#auth-submit, #auth-redirect, #editor-submit  {
+#auth-submit, #auth-redirect, #editor-submit {
   border: none;
   padding: 10px;
   width: 100px;
@@ -119,6 +119,21 @@ svg {
   font-size: 10px;
   padding: 5px;
   width: 75px;
+}
+
+#editor-redirect {
+  border: none;
+  width: 8vw;
+  background-color: black;
+  color: white;
+  margin: -1vw 0 2vw 0;
+  display: inline-block;
+  text-align: center;
+}
+
+#editor-redirect:hover {
+  background-color: white;
+  color: black ;
 }
 
 #auth-submit:hover, #auth-redirect:hover, #editor-submit:hover {

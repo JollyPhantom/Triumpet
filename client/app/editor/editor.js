@@ -44,7 +44,9 @@ angular.module('tp.editor',[])
     Map.update($scope.data.username, {floorPlan:$scope.data.floorPlan});
   };
 
-  $scope.fetch($stateParams.retailer);
+  if($stateParams.retailer){ 
+    $scope.fetch($stateParams.retailer);
+  }
   // $scope.device = navigator.userAgent;
 })
 

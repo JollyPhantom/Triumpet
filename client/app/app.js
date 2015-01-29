@@ -41,7 +41,8 @@ angular.module('triumpet', [
     .state('editor.test',{
       url         : '/:retailer/editor/floorplan',
       template    : '<tp-floor-plan></tp-floor-plan>',
-      controller  : 'EditorCtrl'
+      controller  : 'EditorCtrl',
+      retailerAuth: true
     })
     .state('home',{
       url         : '/',
@@ -150,13 +151,12 @@ angular.module('triumpet', [
 .run(function($rootScope, $location, Auth){
   //TODO: Code to verify token. Uncomment if any route needs to be authenticated.
 
-  // $rootscope.on($routeChangeStart, function(evt, next, current){
-  //   if(next.$$route && next.$$route.userAuth && !Auth.isAuth()){
-  //     $location.path('/signin');
-  //   } else if(next.$$route && next.$$route.retailerAuth && !Auth.isRetailerAuth()){
-  //     $location.path('/signin');
-  //   }
-  // })
-
-
+  $rootScope.$on('$stateChangeStart', function(evt, next, current) {
+    if(next.userAuth && !Auth.isAuth()){
+      $location.path('/signin');
+    }
+    if(next.retailerAuth && !Auth.isRetailerAuth()){
+      $location.path('/signin');
+    }
+  })
 });

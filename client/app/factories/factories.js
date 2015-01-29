@@ -62,11 +62,11 @@ angular.module('tp.factories',[])
 	};
 
 	auth.isAuth = function(){
-		return !!$window.localStroage.getItem('com.triumpet.token') && !!$window.localStroage.getItem('com.triumpet.username');
+		return !!$window.localStorage.getItem('com.triumpet.token') && !!$window.localStorage.getItem('com.triumpet.username');
 	};
 
 	auth.isRetailerAuth = function(){
-		return !!$window.localStroage.getItem('retailer.triumpet.token') && !!$window.localStroage.getItem('retailer.triumpet.username');
+		return !!$window.localStorage.getItem('retailer.triumpet.token') && !!$window.localStorage.getItem('retailer.triumpet.username');
 	};
 
 	auth.signout = function(){
