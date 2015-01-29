@@ -69,6 +69,22 @@ controller.read = function(req,res,next){
   });
 };
 
+//READONE method to fetch one retailer
+controller.readOne = function(req,res,next){
+  findOne({username:req.params.username})
+    .then(function(retailer){
+      if(!retailer){
+        next(new Error('Retailer doesn\'t exist'));
+      } else {
+        retailer.password = undefined;
+        res.send(retailer);
+      }
+    })
+    .fail(function(err){
+      next(err);
+    })
+};
+
 //UPDATE method to update attributes for one retailer
 controller.update = function(req,res,next){
   findOne({username:req.params.username})
@@ -81,6 +97,7 @@ controller.update = function(req,res,next){
           retailer[attr] = req.body[attr];
         }
         retailer.save();
+        console.log(req.body, retailer)
         res.sendStatus(300);
       }
     })

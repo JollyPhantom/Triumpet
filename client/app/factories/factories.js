@@ -1,7 +1,17 @@
 angular.module('tp.factories',[])
 
 .factory('Map', function($http){
+	var map = {};
 
+	map.update = function(username,data){
+		return $http({
+			method: 'PUT',
+			url:'/api/retailers/'+username,
+			data: data
+		});
+	};
+
+	return map;
 })
 
 .factory('Auth',function($http, $location, $window){
@@ -52,18 +62,19 @@ angular.module('tp.factories',[])
 	};
 
 	auth.isAuth = function(){
-		return !!$window.localStroage.getItem('com.triumpet.token') && !!$window.localStroage.getItem('com.triumpet.username');
+		return !!$window.localStorage.getItem('com.triumpet.token') && !!$window.localStorage.getItem('com.triumpet.username');
 	};
 
 	auth.isRetailerAuth = function(){
-		return !!$window.localStroage.getItem('retailer.triumpet.token') && !!$window.localStroage.getItem('retailer.triumpet.username');
+		return !!$window.localStorage.getItem('retailer.triumpet.token') && !!$window.localStorage.getItem('retailer.triumpet.username');
 	};
 
 	auth.signout = function(){
 		$window.localStorage.removeItem('com.triumpet.token');
 		$window.localStorage.removeItem('com.triumpet.username');
 		$window.localStorage.removeItem('retailer.triumpet.token');
-		$window.localStorage.removeItem('retailer.triumpet.username');		//TODO: enter a redirect route
+		$window.localStorage.removeItem('retailer.triumpet.username');
+		//TODO: enter a redirect route
 	};
 
 	return auth;

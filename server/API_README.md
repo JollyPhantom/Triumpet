@@ -15,6 +15,9 @@
 --- Get Request ---
 > Return array of all retailers (password excluded)
 
+--- Get Request (/api/retailers/:username)---
+> Return one retailer (password excluded)
+
 --- Put Request ---
 > Expect retailer's username as a URL params (/api/retailers/:username)
 > Update existing data for a specific retailer

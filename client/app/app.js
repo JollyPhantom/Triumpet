@@ -16,23 +16,33 @@ angular.module('triumpet', [
     })
     .state('auth.signup',{
       url         : '/signup',
-      template    : "<tp-sign-up></tp-sign-up>",
-      controller  : "AuthCtrl"
+      template    : '<tp-sign-up></tp-sign-up>',
+      controller  : 'AuthCtrl'
     })
     .state('auth.signin',{
       url         : '/signin',
-      template    : "<tp-sign-in></tp-sign-in>",
-      controller  : "AuthCtrl"
+      template    : '<tp-sign-in></tp-sign-in>',
+      controller  : 'AuthCtrl'
     })
     .state('auth.retailerSignin',{
       url         : '/retailer/signin',
-      template    : "<tp-retailer-signin></tp-retailer-signin>",
-      controller  : "AuthCtrl"
+      template    : '<tp-retailer-signin></tp-retailer-signin>',
+      controller  : 'AuthCtrl'
     })
     .state('auth.retailerSignup',{
       url         : '/retailer/signup',
-      template    : "<tp-retailer-signup></tp-retailer-signup>",
-      controller  : "AuthCtrl"
+      template    : '<tp-retailer-signup></tp-retailer-signup>',
+      controller  : 'AuthCtrl'
+    })
+    .state('editor',{
+      template    : '<tp-editor></tp-editor>',
+      controller  : 'EditorCtrl'
+    })
+    .state('editor.test',{
+      url         : '/:retailer/editor/floorplan',
+      template    : '<tp-floor-plan></tp-floor-plan>',
+      controller  : 'EditorCtrl',
+      retailerAuth: true
     })
     .state('home',{
       url         : '/',
@@ -193,13 +203,12 @@ angular.module('triumpet', [
 .run(function($rootScope, $location, Auth){
   //TODO: Code to verify token. Uncomment if any route needs to be authenticated.
 
-  // $rootscope.on($routeChangeStart, function(evt, next, current){
-  //   if(next.$$route && next.$$route.userAuth && !Auth.isAuth()){
-  //     $location.path('/signin');
-  //   } else if(next.$$route && next.$$route.retailerAuth && !Auth.isRetailerAuth()){
-  //     $location.path('/signin');
-  //   }
-  // })
-
-
+  $rootScope.$on('$stateChangeStart', function(evt, next, current) {
+    if(next.userAuth && !Auth.isAuth()){
+      $location.path('/signin');
+    }
+    if(next.retailerAuth && !Auth.isRetailerAuth()){
+      $location.path('/signin');
+    }
+  })
 });
