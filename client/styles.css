@@ -22,8 +22,8 @@ svg {
 
 .auth-background {
 	background: url("../assets/background.png");
-	width: 100vw;
-	height: 110vmax;
+	min-width: 100vw;
+	min-height: 100vh;
   background-position: center;
 	background-size: cover;
 	text-align: center;

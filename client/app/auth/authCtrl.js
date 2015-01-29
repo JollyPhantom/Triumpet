@@ -84,6 +84,7 @@ angular.module('tp.auth',[])
 		  	$scope.password = '';
 		  })
 		  .catch(function(error){
+		  	Auth.signout();
 		  	$scope.message = 'Please re-try';
 		  	$scope.username = '';
 		  	$scope.password = '';
@@ -107,6 +108,7 @@ angular.module('tp.auth',[])
 		  	$scope.password = '';
 		  })
 		  .catch(function(error){
+		  	Auth.signout();
 		  	$scope.message = 'Please re-try';
 		  	$scope.username = '';
 		  	$scope.password = '';
