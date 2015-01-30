@@ -7,7 +7,9 @@ angular.module('triumpet', [
   'tp.map',
   'tp.main',
   'ui.router',
-  'mgcrea.ngStrap' // angular strap
+  'mgcrea.ngStrap', // angular-strap, not needed if we are not using their css templates
+  'tp.main',
+  'ui.router'
 ])
 
 // configures routes for the app
