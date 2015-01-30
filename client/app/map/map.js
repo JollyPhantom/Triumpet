@@ -1,28 +1,30 @@
 angular.module('tp.map',[])
 
-.controller('MapCtrl', function($scope, $http){
-  $scope.serverSettings = serverSettings = {
-    // this will need to be updated to be production ready
-    url: 'http://localhost:8080'
-  };
+.controller('MapCtrl', function($scope, $http, $stateParams){
+  // $scope.serverSettings = serverSettings = {
+  //   // this will need to be updated to be production ready
+  //   url: 'http://localhost:8080'
+  // };
   $scope.userLoc;
   $scope.items;
 
-  //needs to be able to fetch the items from the database and cache them in items
-  $scope.getItems = function(){
-    $http.get(serverSettings.url + '/api/items/:retailer'). // this will need to be updated to whatever the actual retailer is...
+  // fetches items from database
+  // this will need to be moved to a factory and imported into the controller
+  $scope.getItems = function(retailer){
+    $http.get('/api/items/' + retailer). // this will need to be updated to whatever the actual retailer is...
       success(function(data, status){
+        console.log(data);
         $scope.items = data;
       }).
       error(function(data, status){
+        console.log(status);
         console.error('[Error]: While Attempting to Fetch Items');
       });
   };
 
-  $scope.addUserToMap = function(event){
-    // firefox/chrome event properties differ??
-    
-  };
+  if ($stateParams.retailer) {
+    $scope.getItems($stateParams.retailer);
+  }
 
 })
 
