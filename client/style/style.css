@@ -11,6 +11,7 @@ svg {
   background-color: #eee;
   display: block;
   margin: 1.5% auto;
+  position: relative;
 }
 
 .img-circle {
@@ -71,6 +72,17 @@ svg {
   display: inline-block;
   margin: 0;
   float: right;
+}
+
+.map-container {
+  text-align: center;
+}
+
+.map-item-search {
+  position: absolute;
+  z-index: 9999;
+  top: 50px;
+  border: 1px solid #ccc;
 }
 
 #editor-control {
