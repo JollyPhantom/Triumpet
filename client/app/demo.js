@@ -23,8 +23,79 @@ var demoRetailer = {
 									]
 };
 
-$.ajax({
-	url:'http://localhost:8080/api/retailers/signup',
-	type:'POST',
-	data:demoRetailer
-})
+
+var newItem = {
+	name: 'apple',
+	category: 'fruit',
+	coordinates: [{x: 10, y: 10}]
+};
+
+var url = 'http://localhost:8080';
+
+// $.ajax({
+// 	url: 'http://localhost:8080/api/retailers/abcstore1',
+// 	type: 'DELETE',
+// 	success: function(){
+// 		createRetailer();
+// 	},
+// 	error: function(e){
+// 		console.log('error trying to delete abcstore1');
+// 	}
+// });
+
+//
+
+function createItem(){
+	$.ajax({
+		url: url + '/api/items/retailer',
+		type: 'POST',
+		data: newItem
+	});
+};
+
+createItem();
+
+
+// function createRetailer(){ 
+// 	$.ajax({
+// 		url:'http://localhost:8080/api/retailers/signup',
+// 		type:'POST',
+// 		data:demoRetailer, 
+// 		success: function(data){
+// 			console.log('data from signing up new retailer', data);
+// 			getRetailerData();
+// 		},
+// 		error: function(e){
+// 			console.log('error attempting to add new retailer to database', e);
+// 		}
+// 	});
+// };
+
+// // do I need to chain all these ajax calls since they are are async and depend on eachother?
+// function getRetailerData(){
+// 	$.ajax({
+// 		url: 'http://localhost:8080/api/retailers/abcstore1',
+// 		type: 'GET',
+// 		success: function(data){
+// 			console.log('retailer data with retailer id', data);
+// 			getRetailerItems();
+// 		},
+// 		error: function(e){
+// 			console.log('error attempgint to fetch retailer id', e);
+// 		}
+// 	});
+// };
+
+// // make ajax call to retrieve items
+// function getRetailerItems(){
+// 	$.ajax({
+// 		url: 'http://localhost:8080/api/items/abcstore1',
+// 		type: 'GET',
+// 		success: function(data){
+// 			console.log('item data', data);
+// 		},
+// 		error: function(e){
+// 			console.log('error attempting to fetch items for retailer', e);
+// 		}
+// 	});
+// };
