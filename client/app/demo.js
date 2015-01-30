@@ -1,3 +1,5 @@
+var url = 'http://localhost:8080';
+
 var demoRetailer = {
 	"username"    : "abcstore1",
 	"password"    : "abcstore1", 
@@ -23,14 +25,34 @@ var demoRetailer = {
 									]
 };
 
-
-var newItem = {
-	name: 'apple',
-	category: 'fruit',
-	coordinates: [{x: 10, y: 10}]
+var Item = function(name, category, coordinates){
+	this.name = name;
+	this.category = category;
+	this.coordinates = [coordinates];
 };
 
-var url = 'http://localhost:8080';
+var item1 = new Item('apple', 'fruit', {x:10,y:10});
+var item2 = new Item('apple sauce', 'canned fruit', {x:20, y:20});
+var item3 = new Item('apple pie', 'baked goods', {x:30, y:30});
+var item4 = new Item('rotten apple bits', 'rotten goodies', {x:40, y:40});
+
+var items = [item1, item2, item3, item4];
+
+// items already written to local database, so don't need to do this unless
+// i delete the local db server  
+// items.forEach(function(item){
+// 	console.log(item);
+// 	createItem(item);
+// });
+
+function createItem(item){
+	$.ajax({
+		url: url + '/api/items/retailer',
+		type: 'POST',
+		data: item
+	});
+};
+
 
 // $.ajax({
 // 	url: 'http://localhost:8080/api/retailers/abcstore1',
@@ -44,17 +66,6 @@ var url = 'http://localhost:8080';
 // });
 
 //
-
-function createItem(){
-	$.ajax({
-		url: url + '/api/items/retailer',
-		type: 'POST',
-		data: newItem
-	});
-};
-
-createItem();
-
 
 // function createRetailer(){ 
 // 	$.ajax({
