@@ -13,7 +13,8 @@ angular.module('tp.map',[])
   $scope.getItems = function(retailer){
     $http.get('/api/items/' + retailer). // this will need to be updated to whatever the actual retailer is...
       success(function(data){
-        $scope.items = data[0];
+        // console.log(data);
+        $scope.items = data;
       }).
       error(function(){
         console.error('[Error]: While Attempting to Fetch Items for ' + retailer);
