@@ -7,6 +7,7 @@ angular.module('tp.map',[])
   // };
   $scope.userLoc;
   $scope.items;
+  $scope.selectedItem = '';
 
   // fetches items from database
   // this will need to be moved to a factory and imported into the controller
