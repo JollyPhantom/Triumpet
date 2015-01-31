@@ -23,8 +23,7 @@ angular.module('tp.map',[])
   };
 
   $scope.drawItem = function(d){
-    console.log(d);
-    $scope.drawItems([$scope.selectedItem],$scope.scale, $scope.svg);
+    $scope.drawItems([$scope.selectedItem],$scope.scale, $scope.svg, false);
   }
 
   // [refactor] this will need to be moved to a factory and imported into the controller
@@ -102,7 +101,7 @@ angular.module('tp.map',[])
       if (d3.event.defaultPrevented) return;
       
       // if there already is a user don't add another..
-      if (d3.selectAll('circle')[0].length > 0) return;
+      if (d3.selectAll('.user')[0].length > 0) return;
 
       // Extract the click location
       var point = d3.mouse(this), 
@@ -117,6 +116,7 @@ angular.module('tp.map',[])
         .attr('r', 10)
         .attr('cx', function(d){return d.x})
         .attr('cy', function(d){return d.y})
+        .attr('class', 'user')
         .call(drag);
 
       updateUserLoc(p);
