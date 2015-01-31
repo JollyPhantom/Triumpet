@@ -1,8 +1,10 @@
-<div class='map-container'>
-  <form class="form-inline" role="form">
-    <div class="form-group">
-      <input type="text" class="form-control" ng-model="selectedItem" ng-options="item.name for item in items" placeholder="Enter Item" bs-typeahead>
-    </div>
-  </form>
- <div ui-view></div>
+<div class='map-background'>
+  <div class='map-main'>
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="selectedItem" ng-options="item.name for item in items" placeholder="Enter Item" bs-typeahead>
+      </div>
+    </form>
+   <div ui-view></div>
+ </div>
 </div>

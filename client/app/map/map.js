@@ -1,10 +1,8 @@
 angular.module('tp.map',[])
 
-.controller('MapCtrl', function($scope, $http, $stateParams){
-  // $scope.serverSettings = serverSettings = {
-  //   // this will need to be updated to be production ready
-  //   url: 'http://localhost:8080'
-  // };
+.controller('MapCtrl', function($scope, $http, $stateParams, Map, Item){
+
+  $scope.scale = 15;
   $scope.userLoc;
   $scope.items;
   $scope.selectedItem = '';
@@ -34,20 +32,36 @@ angular.module('tp.map',[])
       });
   };
 
+  // renders the map on page load
   // this data will be in the form of [{x: 0, y:10}, {x:10, y:20}]
   $scope.renderMap = function(floorplan){
 
   };
 
+  // renders shelves after rendering the map on page load
   // this data will be in the form of [{x: 0, y:10}, {x:10, y:20}]
   $scope.renderShelves = function(shelves){
 
   };
 
+  // renders items when user selects an item
+  $scope.renderItem = function(item){
+
+  };
+
   if ($stateParams.retailer) {
     var retailer = $stateParams.retailer;
-    $scope.getItems(retailer);
-    $scope.getMap(retailer);
+    Map.fetch($stateParams.retailer)
+      .then(function(data){
+        $scope.data = data;
+        Map.drawFloorPlan($scope.data.floorPlan, $scope.scale, $scope.svg);
+        Map.drawShelves($scope.data.shelves, $scope.scale, $scope.svg);
+      })
+    Item.fetchItems($stateParams.retailer)
+      .then(function(items){
+        $scope.items = items;
+        // Item.drawItems($scope.items, $scope.scale, $scope.svg);
+      })
   }
 
 })
@@ -102,81 +116,92 @@ angular.module('tp.map',[])
 
   // function to be called in linker which binds all event handlers to the element
   // how do we integrate d3's and angulars eventing systems??
-  var addEventListeners = function(scope, element, attrs){
-    element.bind('click', function(e){
-      console.log('click event occurred');
-      addUserToMap(e, scope, element);
-    });
-  };
+  // var addEventListeners = function(scope, element, attrs){
+  //   element.bind('click', function(e){
+  //     console.log('click event occurred');
+  //     addUserToMap(e, scope, element);
+  //   });
+  // };
 
   var linker = function(scope, element, attrs) {
+    var width  = $window.innerWidth;
+    var height = $window.innerHeight;
+    
+    scope.svg  = 
+      d3.select('.map-main').append('svg')
+        // .attr('id','map-svg')
+        .attr('id', 'user-map')
+        .on('click', addUserToMap); // [Question: Should event handler be added here or should we use the directives element.bind]
 
     // wires up event handlers
     // addEventListeners(scope, element, attrs);
 
-    var feetToPixel = function(ft){
-      var foot = width/scale;
-      return ft*foot;
-    };
+    // var feetToPixel = function(ft){
+    //   var foot = width/scale;
+    //   return ft*foot;
+    // };
 
-    // converts coordinates to strings to be used with d3
-    var coorsToString = function(coors, convertToPixel){
-      var result = '';
-      for(var i = 0; i < coors.length; i++){
-        var x = coors[i][0];
-        var y = coors[i][1];
-        if(convertToPixel){
-          x = feetToPixel(x);
-          y = feetToPixel(y);
-        }
-        result = result+x+','+y+' ';
-      }
-      return result;
-    };
+    // // converts coordinates to strings to be used with d3
+    // var coorsToString = function(coors, convertToPixel){
+    //   var result = '';
+    //   for(var i = 0; i < coors.length; i++){
+    //     var x = coors[i][0];
+    //     var y = coors[i][1];
+    //     if(convertToPixel){
+    //       x = feetToPixel(x);
+    //       y = feetToPixel(y);
+    //     }
+    //     result = result+x+','+y+' ';
+    //   }
+    //   return result;
+    // };
 
-    // shelf constructor
-    var createShelves = function(x,y,w,h){
-      return {
-        x:feetToPixel(x),
-        y:feetToPixel(y),
-        width:feetToPixel(w),
-        height:feetToPixel(h)
-      }
-    }
+    // // shelf constructor
+    // var createShelves = function(x,y,w,h){
+    //   return {
+    //     x:feetToPixel(x),
+    //     y:feetToPixel(y),
+    //     width:feetToPixel(w),
+    //     height:feetToPixel(h)
+    //   }
+    // }
 
-    // appends svg with pre-defined attribtues
-    var svg = d3.select('.map-container')
-                .append('svg')
-                .attr('width', feetToPixel(roomWidth))
-                .attr('height', feetToPixel(roomHeight))
-                .on('click', addUserToMap); // [Question: Should event handler be added here or should we use the directives element.bind]
+    // // appends svg with pre-defined attribtues
+    // var svg = d3.select('.map-container')
+    //             .append('svg')
+    //             .attr('width', feetToPixel(roomWidth))
+    //             .attr('height', feetToPixel(roomHeight))
+    //             .on('click', addUserToMap); // [Question: Should event handler be added here or should we use the directives element.bind]
 
-    // adds floorplan polygon to svg
-    var floorplan = svg.append('polygon')
-                  .attr('points',coorsToString([
-                    [0,0],
-                    [20,0],
-                    [20,36],
-                    [0,36]
-                    ],true))
-                  .attr('fill','white');
+    // // caches the scope element and makes it available on the parent scope of the ctrl
+    // scope.svg = d3.select('svg');
 
-    var shelf1 = createShelves(5,0,15,1);
-    var shelf2 = createShelves(19,0,1,36);
-    var shelf3 = createShelves(5,35,15,1);
-    var shelf4 = createShelves(0,9,1,18);
-    var shelf5 = createShelves(5,17,10,1);
-    var shelf6 = createShelves(5,18,10,1);
+    // // adds floorplan polygon to svg
+    // var floorplan = svg.append('polygon')
+    //               .attr('points',coorsToString([
+    //                 [0,0],
+    //                 [20,0],
+    //                 [20,36],
+    //                 [0,36]
+    //                 ],true))
+    //               .attr('fill','white');
 
-    var shelves = [shelf1, shelf2, shelf3, shelf4, shelf5, shelf6];
+    // var shelf1 = createShelves(5,0,15,1);
+    // var shelf2 = createShelves(19,0,1,36);
+    // var shelf3 = createShelves(5,35,15,1);
+    // var shelf4 = createShelves(0,9,1,18);
+    // var shelf5 = createShelves(5,17,10,1);
+    // var shelf6 = createShelves(5,18,10,1);
 
-    svg.selectAll('rect').data(shelves)
-       .enter().append('rect')
-       .attr('x',function(d){return d.x})
-       .attr('y',function(d){return d.y})
-       .attr('width',function(d){return d.width})
-       .attr('height',function(d){return d.height})
-       .attr('fill','#bbb');
+    // var shelves = [shelf1, shelf2, shelf3, shelf4, shelf5, shelf6];
+
+    // svg.selectAll('rect').data(shelves)
+    //    .enter().append('rect')
+    //    .attr('x',function(d){return d.x})
+    //    .attr('y',function(d){return d.y})
+    //    .attr('width',function(d){return d.width})
+    //    .attr('height',function(d){return d.height})
+    //    .attr('fill','#bbb');
   };
 
   return {
