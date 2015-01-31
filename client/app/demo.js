@@ -1,3 +1,5 @@
+(function(){
+
 var url = 'http://localhost:8080';
 
 var demoRetailer = {
@@ -25,16 +27,19 @@ var demoRetailer = {
 									]
 };
 
-var Item = function(name, category, coordinates){
+var Item = function(name, category, coordinates, retailerId){
 	this.name = name;
 	this.category = category;
 	this.coordinates = [coordinates];
+	this.retailer_id = retailerId;
 };
 
-var item1 = new Item('apple', 'fruit', {x:10,y:10});
-var item2 = new Item('apple sauce', 'canned fruit', {x:20, y:20});
-var item3 = new Item('apple pie', 'baked goods', {x:30, y:30});
-var item4 = new Item('rotten apple bits', 'rotten goodies', {x:40, y:40});
+var retailerId = '54cc3185d4603eb9315cbff5';
+
+var item1 = new Item('apple', 'fruit', {x:10,y:10}, retailerId);
+var item2 = new Item('apple sauce', 'canned fruit', {x:20, y:20}, retailerId);
+var item3 = new Item('apple pie', 'baked goods', {x:30, y:30}, retailerId);
+var item4 = new Item('rotten apple bits', 'rotten goodies', {x:40, y:40}, retailerId);
 
 var items = [item1, item2, item3, item4];
 
@@ -45,13 +50,13 @@ var items = [item1, item2, item3, item4];
 // 	createItem(item);
 // });
 
-function createItem(item){
-	$.ajax({
-		url: url + '/api/items/retailer',
-		type: 'POST',
-		data: item
-	});
-};
+// function createItem(item){
+// 	$.ajax({
+// 		url: url + '/api/items/retailer',
+// 		type: 'POST',
+// 		data: item
+// 	});
+// };
 
 
 // $.ajax({
@@ -110,3 +115,7 @@ function createItem(item){
 // 		}
 // 	});
 // };
+
+})()
+
+

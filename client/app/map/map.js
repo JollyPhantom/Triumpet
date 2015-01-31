@@ -8,22 +8,46 @@ angular.module('tp.map',[])
   $scope.userLoc;
   $scope.items;
   $scope.selectedItem = '';
-
+  $scope.floorPlan;
   // fetches items from database
-  // this will need to be moved to a factory and imported into the controller
+  // [refactor] this will need to be moved to a factory and imported into the controller
   $scope.getItems = function(retailer){
     $http.get('/api/items/' + retailer). // this will need to be updated to whatever the actual retailer is...
-      success(function(data){
+      success(function(items){
         // console.log(data);
-        $scope.items = data;
+        $scope.items = items;
       }).
       error(function(){
-        console.error('[Error]: While Attempting to Fetch Items for ' + retailer);
+        console.error('[getItems]: could not get items for ' + retailer);
       });
   };
 
+  // [refactor] this will need to be moved to a factory and imported into the controller
+  $scope.getMap = function(retailer){
+    $http.get('/api/retailers/' + retailer).
+      success(function(data){
+        $scope.floorPlan = data.floorPlan; // [refactor] we don't actually need to store the floor plan data, we can just render...
+        console.log('retailer data: ', data);
+      }).
+      error(function(){
+        console.error('[getMap]: could not get map for retailer - ' + retailer);
+      });
+  };
+
+  // this data will be in the form of [{x: 0, y:10}, {x:10, y:20}]
+  $scope.renderMap = function(floorplan){
+
+  };
+
+  // this data will be in the form of [{x: 0, y:10}, {x:10, y:20}]
+  $scope.renderShelves = function(shelves){
+
+  };
+
   if ($stateParams.retailer) {
-    $scope.getItems($stateParams.retailer);
+    var retailer = $stateParams.retailer;
+    $scope.getItems(retailer);
+    $scope.getMap(retailer);
   }
 
 })
