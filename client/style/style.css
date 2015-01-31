@@ -6,13 +6,6 @@ body {
   font-family: Verdana;
 }
 
-svg {
-  border: 1px solid black;
-  background-color: #eee;
-  display: block;
-  margin: 1.5% auto;
-}
-
 .img-circle {
   height: 50px;
   width: 50px;
@@ -71,6 +64,28 @@ svg {
   display: inline-block;
   margin: 0;
   float: right;
+}
+
+#user-map {
+  border: none;
+  background-color: black;
+  opacity: 0.95;
+  width: 60vw;
+  height: 80vh;
+  position: relative;
+  display: inline-block;  
+  margin: 0;
+}
+
+.map-container {
+  text-align: center;
+}
+
+.map-item-search {
+  position: absolute;
+  z-index: 9999;
+  top: 50px;
+  border: 1px solid #ccc;
 }
 
 #editor-control {
@@ -216,4 +231,3 @@ svg {
   font-size: 20px;
   margin: 5px;
 }
-
