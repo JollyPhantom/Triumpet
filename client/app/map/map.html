@@ -1,10 +1,13 @@
 <div class='map-background'>
   <div class='map-main'>
-    <form class="form-inline" role="form">
+    <form ng-submit='drawItems(items, scale, svg)'>
+      <input type='text'>
+    </form>
+    <!-- <form class="form-inline" role="form" ng-submit='log()'>
       <div class="form-group">
         <input type="text" class="form-control" ng-model="selectedItem" ng-options="item.name for item in items" placeholder="Enter Item" bs-typeahead>
       </div>
-    </form>
+    </form> -->
    <div ui-view></div>
  </div>
 </div>
