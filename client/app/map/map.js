@@ -22,6 +22,11 @@ angular.module('tp.map',[])
       });
   };
 
+  $scope.drawItem = function(d){
+    console.log(d);
+    $scope.drawItems([$scope.selectedItem],$scope.scale, $scope.svg);
+  }
+
   // [refactor] this will need to be moved to a factory and imported into the controller
   $scope.getMap = function(retailer){
     $http.get('/api/retailers/' + retailer).
@@ -34,22 +39,18 @@ angular.module('tp.map',[])
       });
   };
 
-  // renders the map on page load
-  // this data will be in the form of [{x: 0, y:10}, {x:10, y:20}]
-  $scope.renderMap = function(floorplan){
-
-  };
-
-  // renders shelves after rendering the map on page load
-  // this data will be in the form of [{x: 0, y:10}, {x:10, y:20}]
-  $scope.renderShelves = function(shelves){
-
-  };
-
-  // renders items when user selects an item
-  $scope.renderItem = function(item){
-
-  };
+ // $scope.drawItem = function(itemName){
+ //  var result = [];
+ //  var length = $scope.items.length;
+ //  for ( var i = 0; i < length; i++ ) {
+ //    if ( $scope.items[i].name === 'itemName' ) {
+ //      result.push($scope.items[i]);
+ //      break;
+ //    }
+ //  }
+ //  console.log('filterItem result', result);
+ //  return result;
+ // };
 
   if ($stateParams.retailer) {
     var retailer = $stateParams.retailer;
@@ -62,7 +63,7 @@ angular.module('tp.map',[])
     Item.fetchItems($stateParams.retailer)
       .then(function(items){
         $scope.items = items;
-        // Item.drawItems($scope.items, $scope.scale, $scope.svg);
+        console.log(items);
       })
   }
 })
