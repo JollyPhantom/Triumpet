@@ -95,7 +95,6 @@ angular.module('tp.factories',[])
 
 	//turn items into an array of coordinates
 	item.flattenItemsCoor = function(items){
-    console.log('items in flattenItemsCoor', items);
 		var result = [];
 		items.forEach(function(item){
 			item.coordinates.forEach(function(coor){
@@ -107,7 +106,6 @@ angular.module('tp.factories',[])
 				});
 			});
 		});
-    console.log('flatted items', result);
 		return result;
 	}
 
@@ -116,7 +114,6 @@ angular.module('tp.factories',[])
     clear = (clear === undefined) ? true : false;
     if ( clear ) {
     	svg.selectAll('circle').remove();
-      console.log('svg being cleared');
     }
     var itm = svg.selectAll('.item').data(item.flattenItemsCoor(items));
     itm.enter().append('circle');
