@@ -12,7 +12,6 @@ angular.module('tp.map',[])
   $scope.getItems = function(retailer){
     $http.get('/api/items/' + retailer). // this will need to be updated to whatever the actual retailer is...
       success(function(items){
-        // console.log(data);
         $scope.items = items;
       }).
       error(function(){
@@ -79,7 +78,6 @@ angular.module('tp.map',[])
   var dragmove = function(d) {
     var x = d3.event.x;
     var y = d3.event.y;
-    console.log(this);
     d3.select(this).attr('cx',x).attr('cy', y);
   };
 
@@ -101,16 +99,12 @@ angular.module('tp.map',[])
     // grabs svg element from the parent element
     var svg = d3.select('svg');
     
-    console.log('circle placed @', p.x, p.y);
     // Append a new point
     svg.append('circle')
       .data([{x: p.x, y: p.y}])
       .attr('r', 10)
       .attr('cx', function(d){return d.x})
       .attr('cy', function(d){return d.y})
-      // .on('click', function(d){
-      //   console.log('d', d);
-      // });
       .call(drag);
   };
 
@@ -212,5 +206,5 @@ angular.module('tp.map',[])
     replace: true
   };
 
-})
+});
 
