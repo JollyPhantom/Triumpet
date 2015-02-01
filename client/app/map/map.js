@@ -4,7 +4,7 @@ angular.module('tp.map',[])
   // makes properties on scope/map/item accessible within html
   angular.extend($scope, Map, Item);
 
-  $scope.scale = 15;
+  $scope.scale =  14.5;
   $scope.userLoc;
   $scope.items;
   $scope.selectedItem = '';
@@ -12,16 +12,15 @@ angular.module('tp.map',[])
 
   // fetches items from database
   // [refactor] this will need to be moved to a factory and imported into the controller
-  $scope.getItems = function(retailer){
-    $http.get('/api/items/' + retailer). // this will need to be updated to whatever the actual retailer is...
-      success(function(items){
-        $scope.items = items;
-      }).
-      error(function(){
-        console.error('[getItems]: could not get items for ' + retailer);
-      });
-  };
-
+  // $scope.getItems = function(retailer){
+  //   $http.get('/api/items/' + retailer). // this will need to be updated to whatever the actual retailer is...
+  //     success(function(items){
+  //       $scope.items = items;
+  //     }).
+  //     error(function(){
+  //       console.error('[getItems]: could not get items for ' + retailer);
+  //     });
+  // };
   $scope.drawItem = function(d){
     $scope.drawItems([$scope.selectedItem],$scope.scale, $scope.svg, false);
   }
@@ -38,23 +37,11 @@ angular.module('tp.map',[])
       });
   };
 
- // $scope.drawItem = function(itemName){
- //  var result = [];
- //  var length = $scope.items.length;
- //  for ( var i = 0; i < length; i++ ) {
- //    if ( $scope.items[i].name === 'itemName' ) {
- //      result.push($scope.items[i]);
- //      break;
- //    }
- //  }
- //  console.log('filterItem result', result);
- //  return result;
- // };
-
   if ($stateParams.retailer) {
     var retailer = $stateParams.retailer;
     Map.fetch($stateParams.retailer)
       .then(function(data){
+        console.log('retailer data', data);
         $scope.data = data;
         Map.drawFloorPlan($scope.data.floorPlan, $scope.scale, $scope.svg);
         Map.drawShelves($scope.data.shelves, $scope.scale, $scope.svg);
@@ -76,7 +63,9 @@ angular.module('tp.map',[])
     scope.svg  = 
       d3.select('.map-main').append('svg')
         .attr('id', 'user-map')
-        .on('click', addUserToMap); // [Question: Should event handler be added here or should we use the directives element.bind]
+        .attr('width', 30 * scope.scale + 'px' ) // [Warning]: 30 is a hardcoded width for this particular map, this is has to be changed to accomodate different maps
+        .attr('height', 20 * scope.scale + 'px') // [Warning]: 20 is a hardcoded height for this particular map, this is has to be changed to accomodate different maps
+        .on('click', addUserToMap); // [Note]: We are using d3 to handle this event, not angular
  
     // defines the drag behavior
     var drag = d3.behavior.drag()

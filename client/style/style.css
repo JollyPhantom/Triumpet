@@ -69,9 +69,9 @@ body {
 #user-map {
   border: none;
   background-color: black;
-  opacity: 0.95;
-  width: 60vw;
-  height: 80vh;
+  opacity: 1;
+/*  width: 100vw;
+  height: 100vh;*/
   position: relative;
   display: inline-block;  
   margin: 0;
@@ -230,4 +230,8 @@ body {
   height: 20px;
   font-size: 20px;
   margin: 5px;
+}
+
+.form-inline {
+  margin: 5% 5% 50px 5%;
 }
