@@ -1,0 +1,10 @@
+<div class='map-background'>
+  <div class='map-main'>
+    <form ng-submit='drawItem(selectedItem)' class="form-inline" role="form">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="selectedItem" ng-options="item.name for item in items" placeholder="Enter Item" ng-change='drawItem(this)' value='{{selectedItem}}' bs-typeahead>
+      </div>
+    </form>
+   <div ui-view></div>
+ </div>
+</div>

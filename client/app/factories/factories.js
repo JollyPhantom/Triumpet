@@ -110,14 +110,18 @@ angular.module('tp.factories',[])
 	}
 
 	// draw items on svg specified as one of the inputs
-  item.drawItems = function(items, scale, svg){
-  	svg.selectAll('circle').remove();
-    var itm = svg.selectAll('circle').data(item.flattenItemsCoor(items));
+  item.drawItems = function(items, scale, svg, clear){
+    clear = (clear === undefined) ? true : false;
+    if ( clear ) {
+    	svg.selectAll('circle').remove();
+    }
+    var itm = svg.selectAll('.item').data(item.flattenItemsCoor(items));
     itm.enter().append('circle');
     itm.attr('cx',function(d){return d.x*scale})
     	 .attr('cy',function(d){return d.y*scale})
     	 .attr('r',function(){return 0.5*scale})
-    	 .attr('fill','red');
+    	 .attr('fill','red')
+       .attr('class', 'item')
   };
 
 	return item;
