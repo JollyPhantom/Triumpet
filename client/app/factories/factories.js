@@ -65,6 +65,8 @@ angular.module('tp.factories',[])
 
 .factory('Item',function($http){
 	var item = {};
+  item.storage = [];
+  item.coordinatesStorage = [];
 
 	//Updates items on retailers.
 	item.update = function(username,data){
@@ -115,6 +117,13 @@ angular.module('tp.factories',[])
 
 	// Draws items on svg specified as one of the inputs.
   item.drawItems = function(items, scale, svg, clear){
+    item.storage.push(items)
+    var coordinatesArray = [scale * items[0].coordinates[0].x, scale * items[0].coordinates[0].y]
+    item.coordinatesStorage.push(coordinatesArray)
+    console.log(item.coordinatesStorage)
+
+
+
     clear = (clear === undefined) ? true : false;
     if ( clear ) {
     	svg.selectAll('circle').remove();
@@ -126,6 +135,15 @@ angular.module('tp.factories',[])
     	 .attr('r',function(){return 0.5*scale})
     	 .attr('fill','red')
        .attr('class', 'item')
+
+    svg.append('circle')
+       .data(item.flattenItemsCoor(items))
+       .attr('r', function(){return 0.5*scale})
+       .attr('cx', function(d){return d.x*scale})
+       .attr('cy', function(d){return d.y*scale})
+       .attr('class', 'selectedItem')
+       .attr('fill','red')
+
   };
 
 	return item;
